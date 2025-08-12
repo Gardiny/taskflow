@@ -1,44 +1,52 @@
+/* fundo da página */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background: #f0f0f0;
+    font-family: Arial, sans-serif; 
+    margin: 20px; 
+    background: #f0f0f0; 
 }
 
+/* título */
 h1 {
     text-align: center;
 }
 
+/*  */
 .task-input {
-    text-align: center;
-    margin-bottom: 20px;
+    text-align: center; 
+    margin-bottom: 20px; 
 }
 
+/* entrada de texto */
 input {
-    padding: 8px;
-    width: 250px;
+    padding: 8px; 
+    width: 250px; 
 }
 
+/* botões */
 button {
-    padding: 8px 12px;
-    background: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
+    padding: 8px 12px; 
+    background: #ff8800; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
 }
 
+/* Estilo do botão  */
 button:hover {
-    background: #0056b3;
+    background: #ff3300; 
 }
 
+/*  */
 ul {
-    list-style: none;
-    padding: 0;
+    list-style: none; 
+    padding: 0; 
 }
 
+/* lista */
 li {
-    background: white;
+    background: white; 
     padding: 10px;
-    margin-bottom: 5px;
-    display: flex;
+    margin-bottom: 5px; 
+    display: flex; 
     justify-content: space-between;
 }

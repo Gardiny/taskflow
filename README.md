@@ -9,10 +9,10 @@ Conta com persistência de dados usando **LocalStorage** e, opcionalmente, integ
 
 ## 🚀 Funcionalidades
 -  Adicionar novas tarefas
--  Editar tarefas existentes
+-  ~~Editar tarefas existentes~~
 -  Marcar tarefas como concluídas
 -  Excluir tarefas
--  Filtrar por status (todas, concluídas, pendentes)
+-  ~~Filtrar por status (todas, concluídas, pendentes)~~
 -  Persistência de dados no **LocalStorage**
 -  API REST para armazenar tarefas em **SQLite** (opcional)
 
@@ -44,7 +44,8 @@ frontend/       # Aplicação web
 
 ### **Frontend**
 1. Acesse a pasta `frontend/`
-2. Abra o arquivo `index.html` no navegador
+2. Primeiro user `npx serve`
+3. Abra o arquivo `index.html` no navegador
 
 ### **Backend**
 1. Acesse a pasta `backend/`
@@ -56,14 +57,9 @@ frontend/       # Aplicação web
    ```bash
    npm start
    ```
-4. A API estará disponível em: `http://localhost:3000`
+4. A API estará disponível em: `http://localhost:4000`
 
 ---
 
 ## 📸 Demonstração
-*(adicione aqui prints ou gifs do projeto em funcionamento)*
-
----
-
-## 📜 Licença
-Este projeto está sob a licença MIT.
+*(link)*
