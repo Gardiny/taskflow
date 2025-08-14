@@ -1,44 +1,48 @@
-const taskInput = document.getElementById('taskTitle');
-const taskEndDateInput = document.getElementById('taskEndDate');
+const taskTitle = document.getElementById('taskTitle');
+const taskDescription = document.getElementById('taskDescription');
+const taskEndDate = document.getElementById('taskEndDate');
 const addTaskBtn = document.getElementById('addTask');
 const taskList = document.getElementById('taskList');
 
 function loadTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const today = new Date();
-
     taskList.innerHTML = '';
+    const today = new Date().toISOString().split('T')[0];
+
     tasks.forEach((task, index) => {
-        if (task.endDate && new Date(task.endDate) < today) {
-            task.completed = true;
-        }
+        const isExpired = task.endDate < today;
+
         const li = document.createElement('li');
         li.innerHTML = `
-            <span style="text-decoration:${task.completed ? 'line-through' : 'none'}">
-                ${task.title}
-                <br>
-                📅 Início: ${task.startDate} | Final: ${task.endDate || 'Não definido'}
-            </span>
+            <div style="text-decoration:${task.completed ? 'line-through' : 'none'}; color:${isExpired ? 'red' : 'inherit'}">
+                <strong>${task.title}</strong> - ${task.description} <br>
+                <small>Início: ${task.startDate} | Fim: ${task.endDate}</small>
+            </div>
             <div>
                 <button onclick="toggleTask(${index})">✔</button>
+                <button onclick="editTask(${index})">✏</button>
                 <button onclick="deleteTask(${index})">🗑</button>
             </div>
         `;
         taskList.appendChild(li);
     });
-    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 function addTask() {
-    const title = taskInput.value.trim();
-    const endDate = taskEndDateInput.value;
-    if (!title) return;
-    const startDate = new Date().toLocaleDateString('pt-BR');
+    const title = taskTitle.value.trim();
+    const description = taskDescription.value.trim();
+    const endDate = taskEndDate.value;
+
+    if (!title || !description || !endDate) return;
+
+    const startDate = new Date().toISOString().split('T')[0];
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks.push({ title, completed: false, startDate, endDate });
+    tasks.push({ title, description, startDate, endDate, completed: false });
+
     localStorage.setItem('tasks', JSON.stringify(tasks));
-    taskInput.value = '';
-    taskEndDateInput.value = '';
+    taskTitle.value = '';
+    taskDescription.value = '';
+    taskEndDate.value = '';
     loadTasks();
 }
 
@@ -54,6 +58,23 @@ function deleteTask(index) {
     tasks.splice(index, 1);
     localStorage.setItem('tasks', JSON.stringify(tasks));
     loadTasks();
+}
+
+function editTask(index) {
+    const tasks = JSON.parse(localStorage.getItem('tasks'));
+    const task = tasks[index];
+
+    const newTitle = prompt("Novo título:", task.title);
+    const newDescription = prompt("Nova descrição:", task.description);
+    const newEndDate = prompt("Nova data final (AAAA-MM-DD):", task.endDate);
+
+    if (newTitle && newDescription && newEndDate) {
+        task.title = newTitle;
+        task.description = newDescription;
+        task.endDate = newEndDate;
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        loadTasks();
+    }
 }
 
 addTaskBtn.addEventListener('click', addTask);
